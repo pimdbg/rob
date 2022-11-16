@@ -1,15 +1,39 @@
 const http = require('http');
-const fs = require('fs');
+const { exit } = require('process');
 
-const PORT = 8080; 
+const hostname = '127.0.0.1';
+const port = 3000;
 
-fs.readFile('./index.html', function (err, html) {
+const server = http.createServer((req, res) => {
+  res.statusCode = 200;
+  res.setHeader('Content-Type', 'text/plain');
+  res.end('Hello World');
 
-    if (err) throw err;    
+//   Handle post request
+  if (req.method == 'POST') {
+        let body = '';
+        
+        req.on('data', (data) => body += data);
+        req.on('end', () => { 
+            const data = JSON.parse(body) ;
 
-    http.createServer(function(request, response) {  
-        response.writeHeader(200, {"Content-Type": "text/html"});  
-        response.write(html);  
-        response.end();  
-    }).listen(PORT);
+            switch(data.action) {
+                case "test": 
+                    console.log("Test succesful!");
+                    break;
+                case "stream": 
+                    console.log("Stream recieved!");
+                    break;
+                default: 
+                    console.log('No valid action');
+                    break;
+            }
+
+            console.table(data);
+        });
+  }
+});
+
+server.listen(port, hostname, () => {
+  console.log(`Server running at http://${hostname}:${port}/`);
 });
