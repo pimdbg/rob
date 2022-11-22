@@ -1,0 +1,19 @@
+{
+  "name": "rob",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pimdbg/rob.git"
+  },
+  "author": "Pim Dautzenberg, Kay Gijzen, Jordi Merx, Kevin Paffen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pimdbg/rob/issues"
+  },
+  "homepage": "https://github.com/pimdbg/rob#readme",
+}
