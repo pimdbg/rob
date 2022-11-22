@@ -16,4 +16,7 @@
     "url": "https://github.com/pimdbg/rob/issues"
   },
   "homepage": "https://github.com/pimdbg/rob#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
 }
