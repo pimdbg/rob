@@ -8,11 +8,6 @@ import io from 'socket.io-client';
 const SOCKET_URL = 'http://localhost:3000';
 const socket = io(SOCKET_URL);
 
-import io from 'socket.io-client';
-
-const SOCKET_URL = 'http://localhost:3000';
-const socket = io(SOCKET_URL);
-
 function App() {
   const [isConnected, setIsConnected] = useState(socket.isConnected);
   const [message, setMessage] = useState('');
