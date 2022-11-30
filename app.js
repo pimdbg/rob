@@ -3,7 +3,12 @@ const app = require('express')();
 // const app = express();
 const { exit } = require('process');
 const http = require('http').createServer(app); // Setup server
-const io = require("socket.io")(http); // Web socket
+// FIXME: hoe veilig is dit???
+const io = require("socket.io")(http, {
+    cors: {
+      origin: '*',
+    }
+  }); // Web socket
 const path = require('path');
 
 // Read config file
@@ -17,7 +22,6 @@ app.get('/', (req, res) => { // Webcam footage for testing
 
 // SocketIO connection
 io.on('connection', (socket) => {
-
     /** 
      * Listen for video capture data
      * 
@@ -29,8 +33,6 @@ io.on('connection', (socket) => {
 
         io.emit('test', decoded); // Pass to test html
     });
-
-
 })
 
 http.listen(config.http.port, () => {
