@@ -10,7 +10,6 @@ const path = require('path');
 const config = JSON.parse(fs.readFileSync('config.json', { encoding:'utf8', flag:'r' } ));
 
 
-
 // App routes
 app.get('/', (req, res) => { // Webcam footage for testing
     res.sendFile(path.join(__dirname + '/index.html'));
@@ -27,8 +26,6 @@ io.on('connection', (socket) => {
     socket.on('video-capture', (data) => {
         // Decode data
         const decoded = Buffer.from(data, 'base64').toString();
-
-        console.log(decoded);
 
         io.emit('test', decoded); // Pass to test html
     });
