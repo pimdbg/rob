@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
+import { Welcome } from './components/component.js';
 
 function App() {
   return (
@@ -17,9 +18,11 @@ function App() {
         >
           Learn React
         </a>
+        <Welcome name="Hello World" />
       </header>
     </div>
   );
 }
+
 
 export default App;
