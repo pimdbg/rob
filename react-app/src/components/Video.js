@@ -1,7 +1,8 @@
-export default function Video() {
+export default function Video({ data, ...props }) {
     return (
-        <>
-            <img src="" alt="" width="500" />
-        </>
+        <img 
+            src={`data:image/jpeg;base64,${data}`} 
+            height="500"
+        />
     )
 }

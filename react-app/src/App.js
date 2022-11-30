@@ -35,7 +35,9 @@ function App() {
   
   return (
     <div className="App"><div className="container">
-    <Video />
+      <Video 
+        data={message}
+      />
     
     <div>
       <DPad />
