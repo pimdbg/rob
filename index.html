@@ -9,18 +9,61 @@
             integrity="sha384-cPwlPLvBTa3sKAgddT6krw0cJat7egBga3DJepJyrLl4Q9/5WLra3rrnMcyTyOnh" 
             crossorigin="anonymous"></script>
     <script defer>
+        // Websocket
         const socket = io();
 
+        // Handle incoming video frames
         socket.on("test", function(data) {
             const img = document.getElementById("video-capture");
             img.src = "data:image/jpeg;base64," + data;
         });
 
+        // Handle button input
+        document.onclick = event => {
+            const target = event.target;
+            const action = target.dataset.action;
+            
+            if (! event.target.classList.contains('movement-btn')) {
+                return;
+            }
+    
+            socket.emit('action', action);
+        };
+
+        window.onkeyup = event => {
+            let action;
+
+            switch(event.code) {
+                case 'keyW': action = 'forwards'; break;
+                case 'keyS': action = 'backwards'; break;
+                case 'keyA': action = 'left'; break;
+                case 'keyD': action = 'right'; break;
+            }   
+
+            if(action !== undefined) {
+                socket.emit('action', action);
+            }
+        }
+
     </script>
+    <style>
+        .movement-btn {
+            background-color: gray;
+            color: white;
+            width: 100px;
+            aspect-ratio: 1/1;
+        }
+    </style>
 </head>
 <body>
 
     <img src="" id="video-capture" alt="" height="500">
 
+    <div>
+        <button id="movement-up" class="movement-btn" data-action="forwards">Up</button>
+        <button id="movement-down" class="movement-btn" data-action="backwards">Down</button>
+        <button id="movement-left" class="movement-btn" data-action="left">Left</button>
+        <button id="movement-right" class="movement-btn" data-action="right">Right</button>
+    </div>
 </body>
 </html>

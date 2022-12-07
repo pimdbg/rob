@@ -35,7 +35,25 @@ io.on('connection', (socket) => {
         io.emit('test', decoded); // Pass to test html
     });
 
-
+    socket.on('action', (data) => { 
+        switch(data) {
+            case 'forwards': 
+                robot.moveForward(); 
+                break;
+            case 'backwards': 
+                robot.moveBackwards(); 
+                break;
+            case 'left': 
+                robot.moveLeft(); 
+                break;
+            case 'right': 
+                robot.moveRight(); 
+                break;
+            default: 
+                throw new Error(); 
+                break;
+        }
+    });
 })
 
 http.listen(config.http.port, () => {
