@@ -1,23 +1,19 @@
-import { useEffect, useReducer, useState } from "react";
+import { useReducer, useState } from "react";
 
-export default function DPad() {
-    const [moveManual, setMoveManual] = useState(false);
+export default function DPad({isActive}) {
+    // const [moveManual, setMoveManual] = useState(false);
     const [movement, dispatch] = useReducer(reducer, { type: 'neutral' });
 
     return (
         <div>
             <div className="d-pad">
-                <button onClick={() => dispatch({type: 'forwards'})} className="btn movement-btn up">Up</button>
-                <button onClick={() => dispatch({type: 'backwards'})} className="btn movement-btn down">Down</button>
-                <button onClick={() => dispatch({type: 'left'})} className="btn movement-btn left">Left</button>
-                <button onClick={() => dispatch({type: 'right'})} className="btn movement-btn right">Right</button>
-            </div>
-            <div>
-                <button onClick={() => setMoveManual(prev => ! prev)}>Humanize</button>
+                <button disabled={isActive} onClick={() => dispatch({type: 'forwards'})} className="btn movement-btn up">Up</button>
+                <button disabled={isActive} onClick={() => dispatch({type: 'backwards'})} className="btn movement-btn down">Down</button>
+                <button disabled={isActive} onClick={() => dispatch({type: 'left'})} className="btn movement-btn left">Left</button>
+                <button disabled={isActive} onClick={() => dispatch({type: 'right'})} className="btn movement-btn right">Right</button>
             </div>
         </div>
     )
-
 
     function reducer(state, action) {
         switch (action.type) {
@@ -38,7 +34,6 @@ export default function DPad() {
                 break;
             default:
                 throw new Error();
-                break;
         }
     }
 }

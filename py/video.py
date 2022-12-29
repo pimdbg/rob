@@ -2,16 +2,20 @@
 import cv2
 import base64
 import socketio 
-  
+from configparser import ConfigParser
+
+config = ConfigParser()
+config.read('config.ini')
+WS_URL = config['DEFAULT']['wsUrl']
+
 # define a video capture object
 vid = cv2.VideoCapture(0)
 
 # Define Socketio client
 sio = socketio.Client()
-sio.connect('http://localhost:3000') # TODO: Make server dynamic to config file
-  
+sio.connect(WS_URL) 
+
 while(True):
-      
     ret, frame = vid.read()                     # get frame from webcam
     res, frame = cv2.imencode('.jpg', frame)    # from image to binary buffer
     data = base64.b64encode(frame)              # convert to base64 format
@@ -19,9 +23,7 @@ while(True):
     # Send data to Websocket
     sio.emit('video-capture', data)
 
-    # the 'q' button is set as the
-    # quitting button you may use any
-    # desired button of your choice
+    # 'q' button is set as the quitting button FIXME: not working
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
   

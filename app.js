@@ -1,8 +1,14 @@
-const fs = require('fs');
-const app = require('express')();
-// const app = express();
-const { exit } = require('process');
+require('dotenv').config();
+const express = require("express");
+
+const app = express();
 const http = require('http').createServer(app); // Setup server
+
+// React application, as default route for any unknown /*
+app.use(
+    express.static(path.join(__dirname, "../rob/react-app/build"))
+);
+
 // FIXME: hoe veilig is dit???
 const io = require("socket.io")(http, {
     cors: {
@@ -11,14 +17,10 @@ const io = require("socket.io")(http, {
   }); // Web socket
 const path = require('path');
 
-// Read config file
-const config = JSON.parse(fs.readFileSync('config.json', { encoding:'utf8', flag:'r' } ));
-
-
 // App routes
-app.get('/', (req, res) => { // Webcam footage for testing
-    res.sendFile(path.join(__dirname + '/index.html'));
-})
+app.get("/api", (req, res) => {
+    res.json({ message: 'not implemented' });
+});
 
 // SocketIO connection
 io.on('connection', (socket) => {
@@ -35,6 +37,6 @@ io.on('connection', (socket) => {
     });
 })
 
-http.listen(config.http.port, () => {
-    console.log(`Server running on port ${ config.http.port }`)
+http.listen(process.env.PORT, () => {
+    console.log(`Server running on port ${ process.env.PORT }`)
 })
