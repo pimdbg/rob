@@ -42,13 +42,13 @@ function App() {
       />
         <div className="buttonDiv">
           
-          <DPad isActive={isHuman} />
+          <DPad isActive={!isHuman} />
 
           <div style={{display:'flex', flexDirection: 'column', width: 200, marginLeft:100}}>
             <h1>Connected: {isConnected ? "Yes" : "No"}</h1>
             <h1>Mode: {isHuman ? "Human" : "Machine"}</h1>
 
-            <button onClick={() => setIsHuman(!isHuman)}>Humanize</button>
+            <button onClick={() => setIsHuman(!isHuman)}>Toggle</button>
           </div>
 
         </div>
