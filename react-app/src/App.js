@@ -5,12 +5,13 @@ import Video from './components/Video';
 
 import io from 'socket.io-client';
 
-const SOCKET_URL = 'http://localhost:3000';
+const SOCKET_URL = '/';
 const socket = io(SOCKET_URL);
 
 function App() {
   const [isConnected, setIsConnected] = useState(socket.isConnected);
   const [message, setMessage] = useState('');
+  const [isHuman, setIsHuman] = useState(false);
 
   useEffect(() => {
     socket.on('connect', () => { 
@@ -34,21 +35,27 @@ function App() {
   }, []);
   
   return (
-    <div className="App"><div className="container">
+    <div className="App">
+      <div className="container">
       <Video 
         data={message}
       />
+        <div className="buttonDiv">
+          
+          <DPad isActive={isHuman} />
+
+          <div style={{display:'flex', flexDirection: 'column', width: 200, marginLeft:100}}>
+            <h1>Connected: {isConnected ? "Yes" : "No"}</h1>
+            <h1>Mode: {isHuman ? "Human" : "Machine"}</h1>
+
+            <button onClick={() => setIsHuman(!isHuman)}>Humanize</button>
+          </div>
+
+        </div>
     
-    <div>
-      <DPad />
+      </div>
+
     </div>
-    <h1>Connected: {isConnected ? "true":"false"}</h1>
-
-        <h2>message: {message}</h2>
-    
-  </div>
-
-</div>
   );
 }
 

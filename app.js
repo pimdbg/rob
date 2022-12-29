@@ -17,8 +17,14 @@ const config = JSON.parse(fs.readFileSync('config.json', { encoding:'utf8', flag
 
 // App routes
 app.get('/', (req, res) => { // Webcam footage for testing
-    res.sendFile(path.join(__dirname + '/index.html'));
+    // res.sendFile(path.join(__dirname + '/index.html'));
+    res.sendFile(path.resolve(__dirname, './react-app/build', 'index.html'));
 })
+
+
+app.get("/api", (req, res) => {
+    res.json({ message: '👋 gebruik dit gewoon! https://medium.com/geekculture/build-and-deploy-a-web-application-with-react-and-node-js-express-bce2c3cfec32' });
+});
 
 // SocketIO connection
 io.on('connection', (socket) => {
@@ -38,3 +44,4 @@ io.on('connection', (socket) => {
 http.listen(config.http.port, () => {
     console.log(`Server running on port ${ config.http.port }`)
 })
+
