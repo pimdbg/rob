@@ -15,7 +15,6 @@ const io = require("socket.io")(http, {
       origin: '*',
     }
   }); // Web socket
-const path = require('path');
 
 // App routes
 app.get("/api", (req, res) => {
