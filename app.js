@@ -1,5 +1,6 @@
 require('dotenv').config();
 const express = require("express");
+const path = require("path");
 
 const app = express();
 const http = require('http').createServer(app); // Setup server
@@ -15,7 +16,6 @@ const io = require("socket.io")(http, {
       origin: '*',
     }
   }); // Web socket
-const path = require('path');
 
 // App routes
 app.get("/api", (req, res) => {

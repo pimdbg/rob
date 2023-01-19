@@ -7,6 +7,7 @@ from configparser import ConfigParser
 config = ConfigParser()
 config.read('config.ini')
 WS_URL = config['DEFAULT']['wsUrl']
+print("streaming to:",WS_URL)
 
 # define a video capture object
 vid = cv2.VideoCapture(0)
