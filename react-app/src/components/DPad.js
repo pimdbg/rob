@@ -1,4 +1,8 @@
 import { useReducer, useState } from "react";
+import io from 'socket.io-client';
+
+const SOCKET_URL = '/';
+const socket = io(SOCKET_URL);
 
 export default function DPad({isActive}) {
     // const [moveManual, setMoveManual] = useState(false);
@@ -7,18 +11,19 @@ export default function DPad({isActive}) {
     return (
         <div>
             <div className="d-pad">
-                <button disabled={isActive} onClick={() => dispatch({type: 'forwards'})} className="btn movement-btn up">Up</button>
-                <button disabled={isActive} onClick={() => dispatch({type: 'backwards'})} className="btn movement-btn down">Down</button>
-                <button disabled={isActive} onClick={() => dispatch({type: 'left'})} className="btn movement-btn left">Left</button>
-                <button disabled={isActive} onClick={() => dispatch({type: 'right'})} className="btn movement-btn right">Right</button>
+                <button disabled={isActive} onClick={() => dispatch({type: 'forwards'})} className="d-pad__btn-up">Up</button>
+                <button disabled={isActive} onClick={() => dispatch({type: 'backwards'})} className="d-pad__btn-down">Down</button>
+                <button disabled={isActive} onClick={() => dispatch({type: 'left'})} className="d-pad__btn-left">Left</button>
+                <button disabled={isActive} onClick={() => dispatch({type: 'right'})} className="d-pad__btn-right">Right</button>
             </div>
         </div>
-    )
+    )   
 
     function reducer(state, action) {
         switch (action.type) {
             case 'forwards':
                 console.log('Moving up');
+                
                 break;
             case 'backwards':
                 console.log('Moving backwards');
