@@ -1,8 +1,10 @@
 require('dotenv').config();
+
 const express = require("express");
 const path = require('path');
 const app = express();
 const http = require('http').createServer(app); // Setup server
+const robot = new Robot();
 
 // React application, as default route for any unknown /*
 app.use(
@@ -33,6 +35,26 @@ io.on('connection', (socket) => {
         const decoded = Buffer.from(data, 'base64').toString();
 
         io.emit('test', decoded); // Pass to test html
+    });
+
+    socket.on('action', (data) => { 
+        switch(data) {
+            case 'forwards': 
+                robot.moveForward(); 
+                break;
+            case 'backwards': 
+                robot.moveBackwards(); 
+                break;
+            case 'left': 
+                robot.moveLeft(); 
+                break;
+            case 'right': 
+                robot.moveRight(); 
+                break;
+            default: 
+                throw new Error(); 
+                break;
+        }
     });
 })
 
