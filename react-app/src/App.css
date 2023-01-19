@@ -1,0 +1,63 @@
+.App {
+  text-align: center;
+}
+
+.container {
+  width: 800px;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.buttonDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  margin: 10px;
+}
+
+.d-pad {
+  display: grid;
+  width: fit-content;
+  margin-inline: auto;
+  gap: 10px;
+  grid-template-rows: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.d-pad__btn-up {
+    grid-column: 2 / 3;
+}
+.d-pad__btn-down {
+  grid-column: 2 / 3;
+  grid-row: 3 / 4;
+}
+.d-pad__btn-left {
+  grid-column: 1 / 2;
+  grid-row: 2 / 3;
+}
+.d-pad__btn-right {
+  grid-column: 3 / 4;
+  grid-row: 2 / 3;
+}
+
+.App-link {
+  color: #61dafb;
+}
+.movement-btn {
+  background-color: gray;
+  color: white;
+  width: 100px;
+  aspect-ratio: 1/1;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
