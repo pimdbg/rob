@@ -1,9 +1,11 @@
 require('dotenv').config();
 
+const Robot = require('./robot.js');
 const express = require("express");
 const path = require('path');
 const app = express();
 const http = require('http').createServer(app); // Setup server
+
 const robot = new Robot();
 
 // React application, as default route for any unknown /*
@@ -40,7 +42,7 @@ io.on('connection', (socket) => {
     socket.on('action', (data) => { 
         switch(data) {
             case 'forwards': 
-                robot.moveForward(); 
+                robot.moveForward();
                 break;
             case 'backwards': 
                 robot.moveBackwards(); 

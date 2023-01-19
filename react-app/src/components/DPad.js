@@ -22,17 +22,16 @@ export default function DPad({isActive}) {
     function reducer(state, action) {
         switch (action.type) {
             case 'forwards':
-                console.log('Moving up');
-                
+                socket.emit('action', 'forwards'); 
                 break;
             case 'backwards':
-                console.log('Moving backwards');
+                socket.emit('action', 'backwards'); 
                 break;
             case 'left': 
-                console.log('Moving left');
+                socket.emit('action', 'left'); 
                 break;
             case 'right':
-                console.log('Moving right');
+                socket.emit('action', 'right'); 
                 break;
             case 'neutral':
                 console.log('Stationary');
